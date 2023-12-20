@@ -1,1 +1,1 @@
-My Personal or School proyects that dont need a an entire repository
+My Personal or School proyects that doesn't need a an entire repository
