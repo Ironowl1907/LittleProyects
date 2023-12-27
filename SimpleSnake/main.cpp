@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include <iostream>
+#include <conio.h>
 
 
 static bool GameOver;
@@ -35,7 +36,11 @@ void Draw(){
   for (int i = 0; i < Lenght; i++){
     for (int ii = 0; ii < Width; ii++){
       if (ii == 0 or ii == Width-1) std::cout << '#';
-      else std::cout << ' ';
+      else{
+        if (i == Y and ii == X) std::cout << 'O';
+        else if (i == FruitY and ii == FruitX) std::cout << '@';
+        else std::cout << ' ';
+      }
     }
     std::cout << '\n';
   }
@@ -46,7 +51,17 @@ void Draw(){
   
 
 void Input(){
-
+  if (_kbhit()){
+    switch (_getche()) {
+      case 'w': Dir = UP;
+      case 's': Dir = DOWN;
+      case 'd': Dir = RIGHT;
+      case 'a': Dir = LEFT;
+      case 'x':
+        GameOver = true;
+      
+    }
+  }
 }
 void Logic(){
 
