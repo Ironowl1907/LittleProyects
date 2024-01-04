@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 
 #define LOG(x) std::cout << x << std::endl
 #define string std::string
@@ -27,6 +28,21 @@ void interpreter(const string &Program){
   std::vector<int> Buffer(1,0);
   int ip = 0;
   int pointer = 0;
+  
+  Stack LoopStack;
+  std::unordered_map<int,int> LoopMap;
+  int LoopBeguiningTepo;
+  for (int Lip = 0; Lip < Program.size();Lip++){
+    if (Program[Lip] == '[')
+      LoopStack.Add(Lip);
+    else if (Program[Lip] == ']'){
+      LoopBeguiningTepo = LoopStack.Pop();
+      LoopMap[LoopBeguiningTepo] = Lip;
+      LoopMap[Lip] = LoopBeguiningTepo;
+    }
+  }
+
+
   while (ip < Program.size()){
     char ActualInstruction = Program[ip];
     
@@ -58,6 +74,13 @@ void interpreter(const string &Program){
         char x; std::cin >> x;
         Buffer[pointer] = (int) x;
         break;
+      case '[':
+        if (!Buffer[pointer])
+          ip = LoopMap[ip];
+        break;
+      case ']':
+        if (Buffer[pointer])
+          ip = LoopMap[ip];
     }
     ip++;
   }
@@ -69,5 +92,5 @@ void interpreter(const string &Program){
 }
 
 int main(){
-   interpreter(",.");
+   interpreter(">++++++++[<+++++++++>-]<.>++++[<+++++++>-]<+.+++++++..+++.>>++++++[<+++++++>-]<++.------------.>++++++[<+++++++++>-]<+.<.+++.------.--------.>>>++++[<++++++++>-]<+.");
 }
