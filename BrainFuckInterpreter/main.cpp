@@ -4,13 +4,31 @@
 #define LOG(x) std::cout << x << std::endl
 #define string std::string
 
-void interpreter(string Program){
+struct Stack{
+  std::vector<int> ST;
+
+  void Add(int V){
+    ST.push_back(V);
+  }
+  int Pop(){
+    const int poped = ST.back();
+    ST.erase(ST.end(),ST.end()+1);
+    return poped;
+  }
+
+  void PrintStack(){
+    for (int a: ST){
+      std::cout << a << std::endl;
+    }
+  }
+};
+
+void interpreter(const string &Program){
   std::vector<int> Buffer(1,0);
   int ip = 0;
-
+  int pointer = 0;
   while (ip < Program.size()){
     char ActualInstruction = Program[ip];
-    int pointer = 0;
     
     switch (ActualInstruction) {
       case '+':
@@ -25,7 +43,7 @@ void interpreter(string Program){
         break;
       case '>':
         pointer ++;
-        if (pointer > Buffer.size())
+        if (pointer >= Buffer.size())
           Buffer.push_back(0);
         break;
       case '<':
@@ -34,16 +52,22 @@ void interpreter(string Program){
         else pointer --;
         break;
       case '.':
-        std::cout << (char) Buffer[pointer];
+        std::cout <<  (char) Buffer[pointer];
         break;
       case ',':
-        int x; std:: cin >> x;
-        Buffer[pointer] = x;
+        char x; std::cin >> x;
+        Buffer[pointer] = (int) x;
         break;
     }
+    ip++;
   }
+  LOG("\n---------------");
+  for (int a : Buffer){
+    std::cout << a << ' ';
+  }
+  LOG('\n');
 }
 
 int main(){
-  
+   interpreter(",.");
 }
