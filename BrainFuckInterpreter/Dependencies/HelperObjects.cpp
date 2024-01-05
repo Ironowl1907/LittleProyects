@@ -1,5 +1,4 @@
-#include "iostream"
-#include "vector"
+#include "includes.h"
 
 struct Stack{
   std::vector<int> ST;
@@ -19,16 +18,3 @@ struct Stack{
     }
   }
 };
-
-
-int main(){
-  Stack S;
-  S.Add(1);
-  S.Add(2);
-  S.Add(3);
-  S.Add(4);
-  S.PrintStack();
-  S.Pop();
-  S.PrintStack();
-  return 0;
-}
