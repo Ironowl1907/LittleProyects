@@ -1,0 +1,11 @@
+{
+  "cmake.configureOnOpen": true,
+  "files.associations": {
+    "iostream": "cpp",
+    "array": "cpp",
+    "string": "cpp",
+    "string_view": "cpp",
+    "span": "cpp",
+    "vector": "cpp"
+  }
+}
