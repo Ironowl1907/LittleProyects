@@ -1,6 +1,4 @@
 #include <bits/stdc++.h>
-#include <string>
-#include <vector>
 
 #define log(x) std::cout << x << '\n'
 
@@ -8,15 +6,10 @@ enum tokenType  {
   openPar, closePar,
   binaryOperator,
   equals,
-  number
+  number,
+  EndOfFile
 };
 
-enum binaryOpperands {
-  add,
-  rest,
-  divi,
-  mul
-};
 
 struct Token{
   std::string value;
@@ -67,14 +60,16 @@ std::vector<Token> Tokenize(std::string source){
     } 
     
   }
-  
+  tokens.push_back(token("EOF", EndOfFile)); 
   return tokens;
 }
 
 int main (int argc, char *argv[]) {
-  std::string rawSource = "(1 * 2) + 3"; 
+  std::ifstream in("../test.txt");
+  std::string rawSource; std::getline(in,rawSource);
+  log(rawSource);
   for (Token i  : Tokenize(rawSource)){
-    std::cout << i.type << ' ' << i.value << '\n';
+    std::cout << "Value: " << i.value << " Type: " << i.type << '\n';
   }
 
   return 0;
