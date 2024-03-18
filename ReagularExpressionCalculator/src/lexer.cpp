@@ -2,26 +2,18 @@
 #include "../headers/lexer.h"
 
 
-struct Token {
-  std::string value;
-  TokenTypes type;
-};
-
 Token token(std::string value = "", TokenTypes type = Plus){
   return {value, type};
 }
 
-class Lexer{
-private:
-  std::vector<Token> tokens;
-  std::string stream = "";
-  int cursor = 0;
-  char at(){
+
+
+// Lexer class definition
+  char Lexer::at(){
     return stream[cursor];
   }
 
-public:
-  std::vector<Token> tokenize(std::string input = ""){
+  std::vector<Token> Lexer::tokenize(std::string input){
     stream = input;
     cursor = 0;
     
@@ -69,5 +61,4 @@ public:
     return tokens;
   }
 
-};
 
